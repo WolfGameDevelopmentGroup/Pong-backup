@@ -48,6 +48,7 @@ public class Screen extends Canvas{
 		this.jframe.pack();
 		this.jframe.setLocationRelativeTo(null);
 		this.jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 	}
 
 	public void showScreen(){
@@ -56,7 +57,6 @@ public class Screen extends Canvas{
 
 	public void drawBackground(Graphics g){
 		g.fillRect(0,0,this.WIDTH*this.SCALE, this.HEIGHT*this.SCALE);
-		g.dispose();
 	}
 
 }

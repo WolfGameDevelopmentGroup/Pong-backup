@@ -30,11 +30,14 @@ public class Game implements Runnable{
 	public int WIDTH, HEIGHT, SCALE;
 	private BufferStrategy bs;
 
+	private Player player;
+
 	public Game(String TITLE, int WIDTH, int HEIGHT, int SCALE){
 		this.TITLE = TITLE;
 		this.WIDTH = WIDTH;
 		this.SCALE = SCALE;
 		this.screen = new Screen(TITLE, WIDTH, HEIGHT, SCALE);
+		this.player = new Player(WIDTH,HEIGHT,SCALE);
 		screen.showScreen();
 	}
 
@@ -53,6 +56,9 @@ public class Game implements Runnable{
 		Graphics g = this.screen.canvas.getGraphics();
 		g.setColor(Color.WHITE);
 		this.screen.drawBackground(g);
+		g.setColor(Color.BLUE);
+		this.player.drawPlayer(g);
+				
 	}
 
 	public synchronized void startGame(){
