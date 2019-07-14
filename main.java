@@ -13,3 +13,16 @@
 	 
 	 Licença: GPL-3.0 <https://www.gnu.org/licenses/gpl-3.0.txt>.
 */
+
+import GamePong.Game;
+
+public class main{
+
+	public static void main(String[] args){
+
+		Game game = new Game();
+
+		game.startGame();
+	}
+
+}

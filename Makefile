@@ -18,13 +18,16 @@
 CC = javac
 PAC = $(wildcard ./GamePong/*.java)
 DEP = $(PAC:.java=.class)
+MAIN = main.java
+MAINCLASS = $(MAIN:.java=.class)
+BIN = $(MAIN:.java=)
 
 all:	libbed run
 
 libbed:	$(DEP)
 
-run:	main.class
-	java $<
+run:	$(MAINCLASS)
+	java $(BIN)
 
 %.class:	%.java
 	$(CC) $<
