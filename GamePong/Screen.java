@@ -54,4 +54,9 @@ public class Screen extends Canvas{
 		this.jframe.setVisible(true);
 	}
 
+	public void drawBackground(Graphics g){
+		g.fillRect(0,0,this.WIDTH*this.SCALE, this.HEIGHT*this.SCALE);
+		g.dispose();
+	}
+
 }

@@ -17,14 +17,23 @@
 package GamePong;
 
 import GamePong.Screen;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
 
 public class Game implements Runnable{
 
 	public boolean isRunning=false;
 	private int frame=0;
-	public Screen screen;
+	public static Screen screen;
+	public String TITLE;
+	public int WIDTH, HEIGHT, SCALE;
+	private BufferStrategy bs;
 
 	public Game(String TITLE, int WIDTH, int HEIGHT, int SCALE){
+		this.TITLE = TITLE;
+		this.WIDTH = WIDTH;
+		this.SCALE = SCALE;
 		this.screen = new Screen(TITLE, WIDTH, HEIGHT, SCALE);
 		screen.showScreen();
 	}
@@ -34,7 +43,16 @@ public class Game implements Runnable{
 	}
 
 	public void renderizeGame(){
-		System.out.println("Renderizando o jogo...");
+		BufferStrategy bs = this.screen.canvas.getBufferStrategy();
+
+		if (bs == null){
+			this.screen.canvas.createBufferStrategy(3);
+			return;
+		}
+
+		Graphics g = this.screen.canvas.getGraphics();
+		g.setColor(Color.WHITE);
+		this.screen.drawBackground(g);
 	}
 
 	public synchronized void startGame(){
