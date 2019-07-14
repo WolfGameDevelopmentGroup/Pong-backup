@@ -19,7 +19,7 @@ package GamePong;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Player{
+public class Player implements PongPlayer{
 
 	private int SCREEN_WIDTH;
 	private int SCREEN_HEIGHT;
@@ -39,7 +39,7 @@ public class Player{
 		this.player_y = this.SCREEN_HEIGHT-this.player_height;
 	}
 
-	public void drawPlayer(Graphics g){
+	public void drawPongPlayer(Graphics g){
 		g.fillRect(this.player_x,this.player_y,this.player_width,this.player_height);
 	}
 
