@@ -28,3 +28,7 @@ run:	main.class
 
 %.class:	%.java
 	$(CC) $<
+
+clean:
+	rm $(DEP)
+	rm *.class
