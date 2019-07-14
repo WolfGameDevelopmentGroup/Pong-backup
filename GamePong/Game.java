@@ -16,10 +16,18 @@
 
 package GamePong;
 
+import GamePong.Screen;
+
 public class Game implements Runnable{
 
 	public boolean isRunning=false;
 	private int frame=0;
+	public Screen screen;
+
+	public Game(String TITLE, int WIDTH, int HEIGHT, int SCALE){
+		this.screen = new Screen(TITLE, WIDTH, HEIGHT, SCALE);
+		screen.showScreen();
+	}
 
 	public void updateGame(){
 		System.out.println("Atualizando o jogo...");

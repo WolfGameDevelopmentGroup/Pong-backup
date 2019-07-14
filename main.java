@@ -26,10 +26,8 @@ public class main{
 
 	public static void main(String[] args){
 
-		Game game = new Game();
-		Screen screen = new Screen(TITLE, WIDTH, HEIGHT, SCALE);
-
-		screen.showScreen();
+		Game game = new Game(TITLE, WIDTH, HEIGHT, SCALE);
+		
 		game.startGame();
 	}
 
