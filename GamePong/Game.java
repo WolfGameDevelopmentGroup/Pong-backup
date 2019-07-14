@@ -19,6 +19,7 @@ package GamePong;
 public class Game implements Runnable{
 
 	public boolean isRunning=false;
+	private int frame=0;
 
 	public void updateGame(){
 		System.out.println("Atualizando o jogo...");
@@ -37,8 +38,15 @@ public class Game implements Runnable{
 	public void run(){
 
 		while(isRunning){
+			frame++;
 			updateGame();
 			renderizeGame();
+			System.out.println(frame);
+			try{
+				Thread.sleep(1000/60);
+			}catch(InterruptedException e){
+				e.printStackTrace();
+			}
 		}
 
 	}

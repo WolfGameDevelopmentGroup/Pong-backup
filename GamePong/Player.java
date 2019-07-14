@@ -15,3 +15,8 @@
 */
 
 package GamePong;
+
+public class Player{
+
+
+}
