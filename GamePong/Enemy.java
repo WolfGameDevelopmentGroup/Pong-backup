@@ -1,7 +1,7 @@
 /*
-	 GamePong/Player.java (Java)
+	 GamePong/Enemy.java (Java)
 	 
-	 Objetivo: Jogador no jogo pong.
+	 Objetivo: Definir a classe Enemy, adversário do player no jogo.
 	 
 	 Site: http://www.dirackslounge.online
 	 
@@ -19,31 +19,32 @@ package GamePong;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Player implements PongPlayer{
+public class Enemy implements PongPlayer{
 
 	private int SCREEN_WIDTH;
 	private int SCREEN_HEIGHT;
 	private int SCALE;
-	private int player_width;
-	private int player_height;
-	private int player_x;
-	private int player_y;
+	private int enemy_width;
+	private int enemy_height;
+	private int enemy_x;
+	private int enemy_y;
 
-	public Player(int SCREEN_WIDTH, int SCREEN_HEIGHT, int SCALE){
+	public Enemy(int SCREEN_WIDTH, int SCREEN_HEIGHT, int SCALE){
 		this.SCREEN_WIDTH = SCREEN_WIDTH*SCALE;
 		this.SCREEN_HEIGHT = SCREEN_HEIGHT*SCALE;
 		this.SCALE = SCALE;
 	}
 
 	public void setPongPlayerSizeAndPosition(){
-		this.player_width=50*this.SCALE;
-		this.player_height=10*this.SCALE;
-		this.player_x = 0;
-		this.player_y = this.SCREEN_HEIGHT-this.player_height;
+		this.enemy_width=50*this.SCALE;
+		this.enemy_height=10*this.SCALE;
+		this.enemy_x = 0;
+		this.enemy_y = 0;
 	}
 
 	public void drawPongPlayer(Graphics g){
-		g.fillRect(this.player_x,this.player_y,this.player_width,this.player_height);
+		g.fillRect(this.enemy_x,this.enemy_y,this.enemy_width,this.enemy_height);
 	}
+
 
 }

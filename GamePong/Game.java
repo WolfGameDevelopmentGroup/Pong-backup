@@ -33,7 +33,7 @@ public class Game implements Runnable{
 	private BufferStrategy bs;
 
 	private Player player;
-	//private Enemy enemy;
+	private Enemy enemy;
 
 	public Game(String TITLE, int WIDTH, int HEIGHT, int SCALE){
 		this.TITLE = TITLE;
@@ -41,7 +41,9 @@ public class Game implements Runnable{
 		this.SCALE = SCALE;
 		this.screen = new Screen(TITLE, WIDTH, HEIGHT, SCALE);
 		this.player = new Player(WIDTH,HEIGHT,SCALE);
-		//this.enemy = new Enemy(WIDTH,HEIGHT,SCALE);
+		this.player.setPongPlayerSizeAndPosition();
+		this.enemy = new Enemy(WIDTH,HEIGHT,SCALE);
+		this.enemy.setPongPlayerSizeAndPosition();
 		screen.showScreen();
 	}
 
@@ -62,9 +64,8 @@ public class Game implements Runnable{
 		this.screen.drawBackground(g);
 		g.setColor(Color.BLUE);
 		this.player.drawPongPlayer(g);
-		//g.setColor(Color.RED);
-		//this.enemy.drawPongPlayer(g);
-				
+		g.setColor(Color.RED);
+		this.enemy.drawPongPlayer(g);		
 	}
 
 	public synchronized void startGame(){

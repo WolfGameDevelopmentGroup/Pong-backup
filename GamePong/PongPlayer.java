@@ -20,6 +20,8 @@ import java.awt.Graphics;
 
 public interface PongPlayer{
 
+	public void setPongPlayerSizeAndPosition();
+
 	public void drawPongPlayer(Graphics g);
 
 }
