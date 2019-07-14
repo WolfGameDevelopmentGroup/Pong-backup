@@ -15,13 +15,21 @@
 */
 
 import GamePong.Game;
+import GamePong.Screen;
 
 public class main{
+
+	public static int WIDTH=160;
+	public static int HEIGHT=120;
+	public static int SCALE=3;
+	public static String TITLE="Game Pong#1";
 
 	public static void main(String[] args){
 
 		Game game = new Game();
+		Screen screen = new Screen(TITLE, WIDTH, HEIGHT, SCALE);
 
+		screen.showScreen();
 		game.startGame();
 	}
 
