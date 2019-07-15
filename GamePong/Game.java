@@ -18,12 +18,14 @@ package GamePong;
 
 import GamePong.Screen;
 import GamePong.Player;
-//import GamePong.Enemy;
+import GamePong.Enemy;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Game implements Runnable{
+public class Game implements Runnable, KeyListener{
 
 	public boolean isRunning=false;
 	private int frame=0;
@@ -44,11 +46,12 @@ public class Game implements Runnable{
 		this.player.setPongPlayerSizeAndPosition();
 		this.enemy = new Enemy(WIDTH,HEIGHT,SCALE);
 		this.enemy.setPongPlayerSizeAndPosition();
+		this.screen.canvas.addKeyListener(this);
 		screen.showScreen();
 	}
 
 	public void updateGame(){
-		System.out.println("Atualizando o jogo...");
+		player.updatePongPlayer();
 	}
 
 	public void renderizeGame(){
@@ -89,5 +92,24 @@ public class Game implements Runnable{
 		}
 
 	}
+
+	public void keyPressed(KeyEvent e){
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+			System.out.println("apertu");
+			player.right=true;
+		}else if(e.getKeyCode()==KeyEvent.VK_LEFT){
+			player.left=true;
+		}
+	}
+
+	public void keyReleased(KeyEvent e){
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+			player.right=false;
+		}else if(e.getKeyCode()==KeyEvent.VK_LEFT){
+			player.left=false;
+		}
+	}
+
+	public void keyTyped(KeyEvent e){}
 
 }

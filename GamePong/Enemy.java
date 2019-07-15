@@ -46,5 +46,6 @@ public class Enemy implements PongPlayer{
 		g.fillRect(this.enemy_x,this.enemy_y,this.enemy_width,this.enemy_height);
 	}
 
+	public void updatePongPlayer(){}
 
 }

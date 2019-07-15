@@ -28,6 +28,8 @@ public class Player implements PongPlayer{
 	private int player_height;
 	private int player_x;
 	private int player_y;
+	public boolean right=false;
+	public boolean left=false;
 
 	public Player(int SCREEN_WIDTH, int SCREEN_HEIGHT, int SCALE){
 		this.SCREEN_WIDTH = SCREEN_WIDTH*SCALE;
@@ -44,6 +46,14 @@ public class Player implements PongPlayer{
 
 	public void drawPongPlayer(Graphics g){
 		g.fillRect(this.player_x,this.player_y,this.player_width,this.player_height);
+	}
+
+	public void updatePongPlayer(){
+		if(this.right){
+			this.player_x++;
+		}else if(this.left){
+			this.player_x--;
+		}
 	}
 
 }

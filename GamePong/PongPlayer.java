@@ -24,4 +24,6 @@ public interface PongPlayer{
 
 	public void drawPongPlayer(Graphics g);
 
+	public void updatePongPlayer();
+
 }

@@ -47,8 +47,7 @@ public class Screen extends Canvas{
 		this.jframe.setResizable(false);
 		this.jframe.pack();
 		this.jframe.setLocationRelativeTo(null);
-		this.jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		this.jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 	}
 
 	public void showScreen(){
