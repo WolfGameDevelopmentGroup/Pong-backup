@@ -51,9 +51,13 @@ public class Player implements PongPlayer{
 
 	public void updatePongPlayer(){
 		if(this.right){
-			this.player_x+=this.VELOCITY*this.SCALE;
+			if(this.player_width+this.player_x+this.VELOCITY*this.SCALE <= this.SCREEN_WIDTH){
+				this.player_x+=this.VELOCITY*this.SCALE;
+			}
 		}else if(this.left){
-			this.player_x-=this.VELOCITY*this.SCALE;
+			if(this.player_x >= 0){
+				this.player_x-=this.VELOCITY*this.SCALE;
+			}
 		}
 	}
 
