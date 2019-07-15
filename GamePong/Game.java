@@ -83,7 +83,6 @@ public class Game implements Runnable, KeyListener{
 			frame++;
 			updateGame();
 			renderizeGame();
-			System.out.println(frame);
 			try{
 				Thread.sleep(1000/60);
 			}catch(InterruptedException e){
@@ -95,7 +94,6 @@ public class Game implements Runnable, KeyListener{
 
 	public void keyPressed(KeyEvent e){
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-			System.out.println("apertu");
 			player.right=true;
 		}else if(e.getKeyCode()==KeyEvent.VK_LEFT){
 			player.left=true;
