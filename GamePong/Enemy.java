@@ -28,6 +28,10 @@ public class Enemy implements PongPlayer{
 	private int enemy_height;
 	private int enemy_x;
 	private int enemy_y;
+	private boolean right;
+	private boolean left;
+	private int numero;
+	private int VELOCITY=2;
 
 	public Enemy(int SCREEN_WIDTH, int SCREEN_HEIGHT, int SCALE){
 		this.SCREEN_WIDTH = SCREEN_WIDTH*SCALE;
@@ -46,6 +50,28 @@ public class Enemy implements PongPlayer{
 		g.fillRect(this.enemy_x,this.enemy_y,this.enemy_width,this.enemy_height);
 	}
 
-	public void updatePongPlayer(){}
+	public void updatePongPlayer(){
+
+		numero = (int)(Math.random()*11.0);
+
+		if (numero < 5) {
+			this.right=true;
+		}else{
+			this.left=true;
+		}
+
+		if(this.right){
+			if(this.enemy_width+this.enemy_x+this.VELOCITY*this.SCALE <= this.SCREEN_WIDTH){
+				this.enemy_x+=this.VELOCITY*this.SCALE;
+			}
+		}else if(this.left){
+			if(this.enemy_x >= 0){
+				this.enemy_x-=this.VELOCITY*this.SCALE;
+			}
+		}
+
+		this.right = false;
+		this.left = false;
+	}
 
 }
