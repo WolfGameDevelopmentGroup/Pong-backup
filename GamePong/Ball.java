@@ -18,6 +18,7 @@ package GamePong;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Random;
 
 public class Ball{
 
@@ -32,11 +33,15 @@ public class Ball{
 	private boolean left;
 	private int numero;
 	private int VELOCITY=2;
+	private double dx;
+	private double dy;
 
 	public Ball(int SCREEN_WIDTH, int SCREEN_HEIGHT, int SCALE){
 		this.SCREEN_WIDTH = SCREEN_WIDTH*SCALE;
 		this.SCREEN_HEIGHT = SCREEN_HEIGHT*SCALE;
 		this.SCALE = SCALE;
+		this.dx = new Random().nextGaussian();
+		this.dy = new Random().nextGaussian();
 	}
 
 	public void setPongPlayerSizeAndPosition(){
@@ -51,7 +56,8 @@ public class Ball{
 	}
 
 	public void updatePongPlayer(){
-		
+		this.ball_x += this.dx * this.VELOCITY;
+		this.ball_y += this.dy * this.VELOCITY;
 	}
 
 }
