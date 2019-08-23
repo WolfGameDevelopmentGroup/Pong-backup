@@ -98,7 +98,7 @@ public class Game implements Runnable, KeyListener{
 			updateGame();
 			renderizeGame();
 			try{
-				Thread.sleep(1000/60);
+				Thread.sleep(1000/100);
 			}catch(InterruptedException e){
 				e.printStackTrace();
 			}
