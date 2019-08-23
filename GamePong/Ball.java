@@ -19,6 +19,7 @@ package GamePong;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
+import java.awt.Rectangle;
 
 public class Ball{
 
@@ -35,6 +36,7 @@ public class Ball{
 	private double VELOCITY=0.8;
 	private double dx;
 	private double dy;
+	private Rectangle bounds;
 
 	public Ball(int SCREEN_WIDTH, int SCREEN_HEIGHT, int SCALE){
 		this.SCREEN_WIDTH = SCREEN_WIDTH*SCALE;
@@ -59,12 +61,20 @@ public class Ball{
 		g.fillRect((int)this.ball_x,(int)this.ball_y,this.ball_width,this.ball_height);
 	}
 
-	public void updateBall(){
+	public void updateBall(Rectangle boundsEnemy, Rectangle boundsPlayer){
+
+		this.bounds = new Rectangle((int)(this.ball_x+(this.dx*this.VELOCITY)),(int)(this.ball_y+(this.dy*this.VELOCITY)),this.ball_width,this.ball_height);
 
 		if(this.ball_x+(this.dx*this.VELOCITY)+this.ball_width > this.SCREEN_WIDTH){
 			this.dx *= -1;
 		}else if(this.ball_x <= 0){
 			this.dx *= -1;
+		}
+
+		if(this.bounds.intersects(boundsEnemy)){
+			this.dy *= -1;
+		}else if(this.bounds.intersects(boundsPlayer)){
+			this.dy *= -1;
 		}
 
 		this.ball_x += this.dx * this.VELOCITY;

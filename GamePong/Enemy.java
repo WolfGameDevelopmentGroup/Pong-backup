@@ -18,6 +18,7 @@ package GamePong;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class Enemy implements PongPlayer{
 
@@ -32,6 +33,7 @@ public class Enemy implements PongPlayer{
 	private boolean left;
 	private int numero;
 	private int VELOCITY=2;
+	private Rectangle rectangle;
 
 	public Enemy(int SCREEN_WIDTH, int SCREEN_HEIGHT, int SCALE){
 		this.SCREEN_WIDTH = SCREEN_WIDTH*SCALE;
@@ -50,9 +52,10 @@ public class Enemy implements PongPlayer{
 		g.fillRect(this.enemy_x,this.enemy_y,this.enemy_width,this.enemy_height);
 	}
 
-	public void updatePongPlayer(){
+	public void updatePongPlayer(){}
 
-		//this.enemy_x += (xBallPosition - this.enemy_x);
+	public Rectangle getRectangle(){
+		return this.rectangle = new Rectangle(this.enemy_x,this.enemy_y,this.enemy_width,this.enemy_height); 
 	}
 
 	public void updateEnemy(int xBallPosition){
