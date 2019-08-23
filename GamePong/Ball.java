@@ -33,7 +33,7 @@ public class Ball{
 	private boolean right;
 	private boolean left;
 	private int numero;
-	private double VELOCITY=2;
+	private double VELOCITY=4;
 	private double dx;
 	private double dy;
 	private Rectangle bounds;
@@ -53,8 +53,11 @@ public class Ball{
 	}
 
 	public void setPongPlayerSizeAndPosition(){
-		this.dx = new Random().nextGaussian();
-		this.dy = new Random().nextGaussian();
+
+		int angle = new Random().nextInt(80);
+
+		this.dx = Math.cos(Math.toRadians(angle));
+		this.dy = Math.sin(Math.toRadians(angle));
 		this.ball_width=5*this.SCALE;
 		this.ball_height=5*this.SCALE;
 		this.ball_x = (this.SCREEN_WIDTH/2);
@@ -67,18 +70,22 @@ public class Ball{
 
 	public void updateBall(Rectangle boundsEnemy, Rectangle boundsPlayer){
 
-		this.bounds = new Rectangle((int)(this.ball_x+(this.dx*this.VELOCITY)),(int)(this.ball_y+(this.dy*this.VELOCITY)),this.ball_width,this.ball_height);
+		this.bounds = new Rectangle((int)(this.ball_x),(int)(this.ball_y),this.ball_width,this.ball_height);
 
-		if(this.ball_x+(this.dx*this.VELOCITY)+this.ball_width > this.SCREEN_WIDTH){
+		if(this.ball_x+this.ball_width > this.SCREEN_WIDTH){
 			this.dx *= -1;
 		}else if(this.ball_x <= 0){
 			this.dx *= -1;
 		}
 
 		if(this.bounds.intersects(boundsEnemy)){
-			this.dy *= -1;
+			this.dy = Math.sin(Math.toRadians(new Random().nextInt(80)));
+			if(dy < 0)		
+				this.dy *= -1;
 		}else if(this.bounds.intersects(boundsPlayer)){
-			this.dy *= -1;
+			this.dy = Math.sin(Math.toRadians(new Random().nextInt(80)));
+			if(dy > 0)		
+				this.dy *= -1;
 		}
 
 		this.ball_x += this.dx * this.VELOCITY;

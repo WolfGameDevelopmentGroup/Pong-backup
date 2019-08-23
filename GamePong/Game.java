@@ -25,6 +25,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.Font;
 
 public class Game implements Runnable, KeyListener{
 
@@ -98,7 +99,7 @@ public class Game implements Runnable, KeyListener{
 			updateGame();
 			renderizeGame();
 			try{
-				Thread.sleep(1000/100);
+				Thread.sleep(1000/60);
 			}catch(InterruptedException e){
 				e.printStackTrace();
 			}

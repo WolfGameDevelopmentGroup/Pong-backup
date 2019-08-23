@@ -43,7 +43,7 @@ public class Player implements PongPlayer{
 	public void setPongPlayerSizeAndPosition(){
 		this.player_width=50*this.SCALE;
 		this.player_height=10*this.SCALE;
-		this.player_x = 0;
+		this.player_x = (int)(this.SCREEN_WIDTH/2);
 		this.player_y = this.SCREEN_HEIGHT-this.player_height;
 	}
 

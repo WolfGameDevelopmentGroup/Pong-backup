@@ -27,7 +27,7 @@ all:	libbed run
 libbed:	$(DEP)
 
 run:	$(MAINCLASS)
-	java $(BIN)
+	nice -19 java $(BIN)
 
 %.class:	%.java
 	$(CC) $<

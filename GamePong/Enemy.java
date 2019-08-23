@@ -32,7 +32,7 @@ public class Enemy implements PongPlayer{
 	private boolean right;
 	private boolean left;
 	private int numero;
-	private double VELOCITY=0.5;
+	private double VELOCITY=1;
 	private Rectangle rectangle;
 	private double dxEnemy;
 
@@ -61,13 +61,27 @@ public class Enemy implements PongPlayer{
 
 	public void updateEnemy(int xBallPosition){
 
-		this.dxEnemy = (xBallPosition - this.enemy_x)*this.VELOCITY*0.4;
+		this.dxEnemy = (xBallPosition - this.enemy_x);
 
-		if(this.enemy_width+this.enemy_x+dxEnemy > this.SCREEN_WIDTH){
+		if(this.dxEnemy > 0){
+			if(this.enemy_width+this.enemy_x+this.VELOCITY*this.SCALE <= this.SCREEN_WIDTH){
+				this.enemy_x+=this.VELOCITY*this.SCALE;
+			}
+		}else{
+			if(this.enemy_x >= 0){
+				this.enemy_x-=this.VELOCITY*this.SCALE;
+			}
+		}
+
+		/*if(this.enemy_width+this.enemy_x+dxEnemy > this.SCREEN_WIDTH){
 				this.enemy_x = this.SCREEN_WIDTH - this.enemy_width;
 		}else if(this.enemy_x >= 0){
-				this.enemy_x += dxEnemy;
-		}
+			if(this.dxEnemy > 0){
+				this.enemy_x += this.VELOCITY*this.SCALE;
+			}else{
+				this.enemy_x -= this.VELOCITY*this.SCALE;
+			}
+		}*/
 
 	}
 
