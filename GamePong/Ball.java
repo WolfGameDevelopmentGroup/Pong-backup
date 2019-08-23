@@ -27,12 +27,12 @@ public class Ball{
 	private int SCALE;
 	private int ball_width;
 	private int ball_height;
-	private int ball_x;
-	private int ball_y;
+	private double ball_x;
+	private double ball_y;
 	private boolean right;
 	private boolean left;
 	private int numero;
-	private double VELOCITY=0.5;
+	private double VELOCITY=0.8;
 	private double dx;
 	private double dy;
 
@@ -45,21 +45,28 @@ public class Ball{
 	}
 
 	public int getBallXPosition(){
-		return this.ball_x;
+		return (int)this.ball_x;
 	}
 
 	public void setPongPlayerSizeAndPosition(){
 		this.ball_width=5*this.SCALE;
 		this.ball_height=5*this.SCALE;
-		this.ball_x = (int)(this.SCREEN_WIDTH/2);
-		this.ball_y = (int)(this.SCREEN_HEIGHT/2);
+		this.ball_x = (this.SCREEN_WIDTH/2);
+		this.ball_y = (this.SCREEN_HEIGHT/2);
 	}
 
 	public void drawPongPlayer(Graphics g){
-		g.fillRect(this.ball_x,this.ball_y,this.ball_width,this.ball_height);
+		g.fillRect((int)this.ball_x,(int)this.ball_y,this.ball_width,this.ball_height);
 	}
 
-	public void updatePongPlayer(){
+	public void updateBall(){
+
+		if(this.ball_x+(this.dx*this.VELOCITY)+this.ball_width > this.SCREEN_WIDTH){
+			this.dx *= -1;
+		}else if(this.ball_x <= 0){
+			this.dx *= -1;
+		}
+
 		this.ball_x += this.dx * this.VELOCITY;
 		this.ball_y += this.dy * this.VELOCITY;
 	}

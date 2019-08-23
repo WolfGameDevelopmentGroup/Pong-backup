@@ -57,7 +57,7 @@ public class Game implements Runnable, KeyListener{
 	public void updateGame(){
 		player.updatePongPlayer();
 		enemy.updateEnemy(this.ball.getBallXPosition());
-		ball.updatePongPlayer();
+		ball.updateBall();
 	}
 
 	public void renderizeGame(){
