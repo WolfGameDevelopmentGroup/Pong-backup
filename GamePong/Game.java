@@ -65,8 +65,12 @@ public class Game implements Runnable, KeyListener{
 		enemy.updateEnemy(this.ball.getBallXPosition());
 		ball.updateBall(enemy.getRectangle(),player.getRectangle());
 
-		if(this.ball.getBallYPosition() < 0 || this.ball.getBallYPosition() > (this.HEIGHT * this.SCALE)){
+		if(this.ball.getBallYPosition() < 0 ){
 			this.ball.setPongPlayerSizeAndPosition();
+			this.ball.playerScore++;
+		}else if(this.ball.getBallYPosition() > (this.HEIGHT * this.SCALE)){
+			this.ball.setPongPlayerSizeAndPosition();
+			this.ball.enemyScore++;
 		}
 	}
 
@@ -79,13 +83,13 @@ public class Game implements Runnable, KeyListener{
 		}
 
 		Graphics g = this.layer.getGraphics();
-		g.setColor(Color.WHITE);
-		this.screen.drawBackground(g);
-		g.setColor(Color.BLUE);
-		this.player.drawPongPlayer(g);
-		g.setColor(Color.RED);
-		this.enemy.drawPongPlayer(g);
 		g.setColor(Color.BLACK);
+		this.screen.drawBackground(g,this.ball.enemyScore,this.ball.playerScore);
+		g.setColor(Color.WHITE);
+		this.player.drawPongPlayer(g);
+		g.setColor(Color.WHITE);
+		this.enemy.drawPongPlayer(g);
+		g.setColor(Color.WHITE);
 		this.ball.drawPongPlayer(g);
 
 		g = bs.getDrawGraphics();

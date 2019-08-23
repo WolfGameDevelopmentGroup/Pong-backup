@@ -37,6 +37,8 @@ public class Ball{
 	private double dx;
 	private double dy;
 	private Rectangle bounds;
+	public int enemyScore=0;
+	public int playerScore=0;
 
 	public Ball(int SCREEN_WIDTH, int SCREEN_HEIGHT, int SCALE){
 		this.SCREEN_WIDTH = SCREEN_WIDTH*SCALE;
