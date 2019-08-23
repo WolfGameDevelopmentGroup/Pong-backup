@@ -23,6 +23,7 @@ import GamePong.Ball;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.Font;
@@ -35,6 +36,7 @@ public class Game implements Runnable, KeyListener{
 	public String TITLE;
 	public int WIDTH, HEIGHT, SCALE;
 	private BufferStrategy bs;
+	private BufferedImage layer;
 
 	private Player player;
 	private Enemy enemy;
@@ -45,6 +47,7 @@ public class Game implements Runnable, KeyListener{
 		this.WIDTH = WIDTH;
 		this.HEIGHT = HEIGHT;
 		this.SCALE = SCALE;
+		this.layer = new BufferedImage(this.WIDTH,this.HEIGHT,BufferedImage.TYPE_INT_RGB);
 		this.screen = new Screen(TITLE, WIDTH, HEIGHT, SCALE);
 		this.player = new Player(WIDTH,HEIGHT,SCALE);
 		this.player.setPongPlayerSizeAndPosition();
@@ -68,14 +71,14 @@ public class Game implements Runnable, KeyListener{
 	}
 
 	public void renderizeGame(){
-		BufferStrategy bs = this.screen.canvas.getBufferStrategy();
+		this.bs = this.screen.canvas.getBufferStrategy();
 
-		if (bs == null){
+		if (this.bs == null){
 			this.screen.canvas.createBufferStrategy(3);
 			return;
 		}
 
-		Graphics g = this.screen.canvas.getGraphics();
+		Graphics g = this.layer.getGraphics();
 		g.setColor(Color.WHITE);
 		this.screen.drawBackground(g);
 		g.setColor(Color.BLUE);
@@ -83,7 +86,12 @@ public class Game implements Runnable, KeyListener{
 		g.setColor(Color.RED);
 		this.enemy.drawPongPlayer(g);
 		g.setColor(Color.BLACK);
-		this.ball.drawPongPlayer(g);		
+		this.ball.drawPongPlayer(g);
+
+		g = bs.getDrawGraphics();
+		g.drawImage(layer, 0, 0, WIDTH*SCALE,HEIGHT*SCALE,null);
+
+		this.bs.show();		
 	}
 
 	public synchronized void startGame(){
