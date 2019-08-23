@@ -32,7 +32,7 @@ public class Enemy implements PongPlayer{
 	private boolean right;
 	private boolean left;
 	private int numero;
-	private int VELOCITY=2;
+	private double VELOCITY=0.5;
 	private Rectangle rectangle;
 
 	public Enemy(int SCREEN_WIDTH, int SCREEN_HEIGHT, int SCALE){
@@ -60,7 +60,7 @@ public class Enemy implements PongPlayer{
 
 	public void updateEnemy(int xBallPosition){
 
-		this.enemy_x += (xBallPosition - this.enemy_x);
+		this.enemy_x += (xBallPosition - this.enemy_x)*this.VELOCITY;
 	}
 
 }

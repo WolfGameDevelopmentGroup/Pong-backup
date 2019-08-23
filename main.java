@@ -18,7 +18,7 @@ import GamePong.Game;
 
 public class main{
 
-	public static int WIDTH=400;
+	public static int WIDTH=300;
 	public static int HEIGHT=300;
 	public static int SCALE=1;
 	public static String TITLE="Game Pong#1";

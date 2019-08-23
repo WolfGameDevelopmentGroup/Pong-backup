@@ -42,6 +42,7 @@ public class Game implements Runnable, KeyListener{
 	public Game(String TITLE, int WIDTH, int HEIGHT, int SCALE){
 		this.TITLE = TITLE;
 		this.WIDTH = WIDTH;
+		this.HEIGHT = HEIGHT;
 		this.SCALE = SCALE;
 		this.screen = new Screen(TITLE, WIDTH, HEIGHT, SCALE);
 		this.player = new Player(WIDTH,HEIGHT,SCALE);
@@ -52,12 +53,17 @@ public class Game implements Runnable, KeyListener{
 		this.ball.setPongPlayerSizeAndPosition();
 		this.screen.canvas.addKeyListener(this);
 		screen.showScreen();
+		this.screen.canvas.requestFocus();
 	}
 
 	public void updateGame(){
 		player.updatePongPlayer();
 		enemy.updateEnemy(this.ball.getBallXPosition());
 		ball.updateBall(enemy.getRectangle(),player.getRectangle());
+
+		if(this.ball.getBallYPosition() < 0 || this.ball.getBallYPosition() > (this.HEIGHT * this.SCALE)){
+			this.ball.setPongPlayerSizeAndPosition();
+		}
 	}
 
 	public void renderizeGame(){

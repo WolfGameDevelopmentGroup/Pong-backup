@@ -42,15 +42,19 @@ public class Ball{
 		this.SCREEN_WIDTH = SCREEN_WIDTH*SCALE;
 		this.SCREEN_HEIGHT = SCREEN_HEIGHT*SCALE;
 		this.SCALE = SCALE;
-		this.dx = new Random().nextGaussian();
-		this.dy = new Random().nextGaussian();
 	}
 
 	public int getBallXPosition(){
 		return (int)this.ball_x;
 	}
 
+	public int getBallYPosition(){
+		return (int)this.ball_y;
+	}
+
 	public void setPongPlayerSizeAndPosition(){
+		this.dx = new Random().nextGaussian();
+		this.dy = new Random().nextGaussian();
 		this.ball_width=5*this.SCALE;
 		this.ball_height=5*this.SCALE;
 		this.ball_x = (this.SCREEN_WIDTH/2);
