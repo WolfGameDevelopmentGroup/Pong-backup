@@ -33,7 +33,7 @@ public class Ball{
 	private boolean right;
 	private boolean left;
 	private int numero;
-	private double VELOCITY=0.8;
+	private double VELOCITY=2;
 	private double dx;
 	private double dy;
 	private Rectangle bounds;
