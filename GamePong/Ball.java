@@ -32,7 +32,7 @@ public class Ball{
 	private boolean right;
 	private boolean left;
 	private int numero;
-	private int VELOCITY=2;
+	private double VELOCITY=0.5;
 	private double dx;
 	private double dy;
 
@@ -42,6 +42,10 @@ public class Ball{
 		this.SCALE = SCALE;
 		this.dx = new Random().nextGaussian();
 		this.dy = new Random().nextGaussian();
+	}
+
+	public int getBallXPosition(){
+		return this.ball_x;
 	}
 
 	public void setPongPlayerSizeAndPosition(){

@@ -52,26 +52,12 @@ public class Enemy implements PongPlayer{
 
 	public void updatePongPlayer(){
 
-		numero = (int)(Math.random()*11.0);
+		//this.enemy_x += (xBallPosition - this.enemy_x);
+	}
 
-		if (numero < 5) {
-			this.right=true;
-		}else{
-			this.left=true;
-		}
+	public void updateEnemy(int xBallPosition){
 
-		if(this.right){
-			if(this.enemy_width+this.enemy_x+this.VELOCITY*this.SCALE <= this.SCREEN_WIDTH){
-				this.enemy_x+=this.VELOCITY*this.SCALE;
-			}
-		}else if(this.left){
-			if(this.enemy_x >= 0){
-				this.enemy_x-=this.VELOCITY*this.SCALE;
-			}
-		}
-
-		this.right = false;
-		this.left = false;
+		this.enemy_x += (xBallPosition - this.enemy_x);
 	}
 
 }

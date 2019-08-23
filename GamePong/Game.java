@@ -37,7 +37,7 @@ public class Game implements Runnable, KeyListener{
 
 	private Player player;
 	private Enemy enemy;
-	private Ball ball;
+	public Ball ball;
 
 	public Game(String TITLE, int WIDTH, int HEIGHT, int SCALE){
 		this.TITLE = TITLE;
@@ -56,7 +56,7 @@ public class Game implements Runnable, KeyListener{
 
 	public void updateGame(){
 		player.updatePongPlayer();
-		enemy.updatePongPlayer();
+		enemy.updateEnemy(this.ball.getBallXPosition());
 		ball.updatePongPlayer();
 	}
 
