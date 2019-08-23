@@ -18,10 +18,10 @@ import GamePong.Game;
 
 public class main{
 
-	public static int WIDTH=200;
-	public static int HEIGHT=200;
+	public static int WIDTH=250;
+	public static int HEIGHT=250;
 	public static int SCALE=1;
-	public static String TITLE="Game Pong#1";
+	public static String TITLE="Pong Player";
 
 	public static void main(String[] args){
 
