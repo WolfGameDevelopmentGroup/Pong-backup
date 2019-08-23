@@ -19,6 +19,7 @@ package GamePong;
 import GamePong.Screen;
 import GamePong.Player;
 import GamePong.Enemy;
+import GamePong.Ball;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -36,6 +37,7 @@ public class Game implements Runnable, KeyListener{
 
 	private Player player;
 	private Enemy enemy;
+	private Ball ball;
 
 	public Game(String TITLE, int WIDTH, int HEIGHT, int SCALE){
 		this.TITLE = TITLE;
@@ -46,6 +48,8 @@ public class Game implements Runnable, KeyListener{
 		this.player.setPongPlayerSizeAndPosition();
 		this.enemy = new Enemy(WIDTH,HEIGHT,SCALE);
 		this.enemy.setPongPlayerSizeAndPosition();
+		this.ball = new Ball(WIDTH,HEIGHT,SCALE);
+		this.ball.setPongPlayerSizeAndPosition();
 		this.screen.canvas.addKeyListener(this);
 		screen.showScreen();
 	}
@@ -53,6 +57,7 @@ public class Game implements Runnable, KeyListener{
 	public void updateGame(){
 		player.updatePongPlayer();
 		enemy.updatePongPlayer();
+		ball.updatePongPlayer();
 	}
 
 	public void renderizeGame(){
@@ -69,7 +74,9 @@ public class Game implements Runnable, KeyListener{
 		g.setColor(Color.BLUE);
 		this.player.drawPongPlayer(g);
 		g.setColor(Color.RED);
-		this.enemy.drawPongPlayer(g);		
+		this.enemy.drawPongPlayer(g);
+		g.setColor(Color.BLACK);
+		this.ball.drawPongPlayer(g);		
 	}
 
 	public synchronized void startGame(){
