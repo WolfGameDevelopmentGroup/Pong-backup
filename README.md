@@ -4,4 +4,4 @@
 
 > Recriar o Jogo Pong em linguagem Java.
 
-![Imagem Jogo Pong](https://github.com/Dirack/Jogo-Pong/blob/master/foto-pong.jpg)
+![Imagem Jogo Pong](https://github.com/Dirack/Jogo-Pong/blob/master/images/foto-pong.jpg)
