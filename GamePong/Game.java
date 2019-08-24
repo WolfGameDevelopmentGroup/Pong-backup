@@ -20,6 +20,7 @@ import GamePong.Screen;
 import GamePong.Player;
 import GamePong.Enemy;
 import GamePong.Ball;
+import GamePong.Sound;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -68,9 +69,11 @@ public class Game implements Runnable, KeyListener{
 		if(this.ball.getBallYPosition() < 0 ){
 			this.ball.setPongPlayerSizeAndPosition();
 			this.ball.playerScore++;
+			Sound.point.play();
 		}else if(this.ball.getBallYPosition() > (this.HEIGHT * this.SCALE)){
 			this.ball.setPongPlayerSizeAndPosition();
 			this.ball.enemyScore++;
+			Sound.pointEnemy.play();
 		}
 	}
 
@@ -102,6 +105,7 @@ public class Game implements Runnable, KeyListener{
 		this.isRunning = true;
 		Thread thread = new Thread(this);
 		thread.start();
+		//Sound.musicBackground.loop();
 	}
 
 	public void run(){

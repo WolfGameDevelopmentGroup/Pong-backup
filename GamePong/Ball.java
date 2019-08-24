@@ -33,7 +33,8 @@ public class Ball{
 	private boolean right;
 	private boolean left;
 	private int numero;
-	private double VELOCITY=4;
+	private double v0=2;
+	private double VELOCITY=this.v0;
 	private double dx;
 	private double dy;
 	private Rectangle bounds;
@@ -56,7 +57,12 @@ public class Ball{
 
 	public void setPongPlayerSizeAndPosition(){
 
-		int angle = new Random().nextInt(80);
+		int numAleatorio = new Random().nextInt(11);
+		int angle = new Random().nextInt(180);
+
+		if(numAleatorio <= 5){
+			angle += 180;
+		}
 
 		this.dx = Math.cos(Math.toRadians(angle));
 		this.dy = Math.sin(Math.toRadians(angle));
@@ -64,6 +70,7 @@ public class Ball{
 		this.ball_height=5*this.SCALE;
 		this.ball_x = (this.SCREEN_WIDTH/2);
 		this.ball_y = (this.SCREEN_HEIGHT/2);
+		this.VELOCITY=v0;
 	}
 
 	public void drawPongPlayer(Graphics g){
@@ -81,10 +88,16 @@ public class Ball{
 		}
 
 		if(this.bounds.intersects(boundsEnemy)){
+			Sound.beep.play();
+			this.VELOCITY += 0.1;
+			this.dx = Math.cos(Math.toRadians(new Random().nextInt(80)));
 			this.dy = Math.sin(Math.toRadians(new Random().nextInt(80)));
 			if(dy < 0)		
 				this.dy *= -1;
 		}else if(this.bounds.intersects(boundsPlayer)){
+			Sound.beep.play();
+			this.VELOCITY += 0.1;
+			this.dx = Math.cos(Math.toRadians(new Random().nextInt(80)));
 			this.dy = Math.sin(Math.toRadians(new Random().nextInt(80)));
 			if(dy > 0)		
 				this.dy *= -1;
@@ -92,6 +105,7 @@ public class Ball{
 
 		this.ball_x += this.dx * this.VELOCITY;
 		this.ball_y += this.dy * this.VELOCITY;
+
 	}
 
 }
