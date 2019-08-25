@@ -38,7 +38,6 @@ public class Game implements Runnable, KeyListener{
 	public int WIDTH, HEIGHT, SCALE;
 	private BufferStrategy bs;
 	private BufferedImage layer;
-
 	private Player player;
 	private Enemy enemy;
 	public Ball ball;
@@ -56,6 +55,8 @@ public class Game implements Runnable, KeyListener{
 		this.screen.canvas.addKeyListener(this);
 		screen.showScreen();
 		this.screen.canvas.requestFocus();
+		this.screen.canvas.createBufferStrategy(3);
+		this.bs = this.screen.canvas.getBufferStrategy();
 	}
 
 	private void restartGameAfterAPoint(){
@@ -80,25 +81,20 @@ public class Game implements Runnable, KeyListener{
 		}
 	}
 
-	public void renderizeGame(){
-		this.bs = this.screen.canvas.getBufferStrategy();
-
-		if (this.bs == null){
-			this.screen.canvas.createBufferStrategy(3);
-			return;
-		}
-
-		Graphics g = this.layer.getGraphics();
+	private void drawFrame(Graphics g){
 		g.setColor(Color.BLACK);
 		this.screen.drawBackground(g,this.enemy.score,this.player.score);
 		g.setColor(Color.WHITE);
 		this.player.drawPongPlayer(g);
 		this.enemy.drawPongPlayer(g);
 		this.ball.drawPongPlayer(g);
-
-		g = bs.getDrawGraphics();
+		g = this.bs.getDrawGraphics();
 		g.drawImage(layer, 0, 0, WIDTH*SCALE,HEIGHT*SCALE,null);
+	}
 
+	public void renderizeGame(){
+		Graphics g = this.layer.getGraphics();
+		this.drawFrame(g);
 		this.bs.show();		
 	}
 
