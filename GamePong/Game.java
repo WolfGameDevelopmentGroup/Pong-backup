@@ -93,9 +93,7 @@ public class Game implements Runnable, KeyListener{
 		this.screen.drawBackground(g,this.enemy.score,this.player.score);
 		g.setColor(Color.WHITE);
 		this.player.drawPongPlayer(g);
-		g.setColor(Color.WHITE);
 		this.enemy.drawPongPlayer(g);
-		g.setColor(Color.WHITE);
 		this.ball.drawPongPlayer(g);
 
 		g = bs.getDrawGraphics();
