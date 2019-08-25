@@ -32,6 +32,7 @@ import GamePong.Sound;
 public class Game implements Runnable, KeyListener{
 
 	public boolean isRunning=false;
+	public boolean gameOver=false;
 	private int frame=0;
 	public static Screen screen;
 	public String TITLE;
@@ -79,6 +80,10 @@ public class Game implements Runnable, KeyListener{
 			this.enemy.givePongPlayerAPoint();
 			Sound.enemyPoint.play();
 		}
+
+		if(this.enemy.score > 5){
+			this.gameOver = true;
+		}
 	}
 
 	private void drawFrame(Graphics g){
@@ -92,9 +97,21 @@ public class Game implements Runnable, KeyListener{
 		g.drawImage(layer, 0, 0, WIDTH*SCALE,HEIGHT*SCALE,null);
 	}
 
+	private void drawGameOverFrame(Graphics g){
+		g.setColor(Color.RED);
+		g.drawString("GAME OVER",(this.ball.SCREEN_WIDTH/2)-30,(this.SCALE*this.HEIGHT)/2-10);
+		this.ball.setPongPlayerPosition(this.ball.SCREEN_WIDTH/2,this.ball.SCREEN_HEIGHT/2);
+		g = this.bs.getDrawGraphics();
+		g.drawImage(layer, 0, 0, WIDTH*SCALE,HEIGHT*SCALE,null);
+	}
+
 	public void renderizeGame(){
 		Graphics g = this.layer.getGraphics();
-		this.drawFrame(g);
+		if(!(gameOver)){
+			this.drawFrame(g);
+		}else{
+			this.drawGameOverFrame(g);
+		}
 		this.bs.show();		
 	}
 

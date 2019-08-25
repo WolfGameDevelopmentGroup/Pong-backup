@@ -45,6 +45,10 @@ public class Ball extends PongPlayer{
 		int numAleatorio = new Random().nextInt(11);
 		int angle = new Random().nextInt(179);
 
+		if(angle < 10 || angle > 170){
+			angle += 5;
+		}
+
 		if(numAleatorio <= 5){
 			angle += 180;
 		}
