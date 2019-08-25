@@ -43,7 +43,7 @@ public class Ball extends PongPlayer{
 	public void giveBallAnStartingAngle(){
 
 		int numAleatorio = new Random().nextInt(11);
-		int angle = new Random().nextInt(180);
+		int angle = new Random().nextInt(179);
 
 		if(numAleatorio <= 5){
 			angle += 180;
@@ -62,28 +62,31 @@ public class Ball extends PongPlayer{
 		return (int)this.position_y;
 	}
 
+	private void giveBallRandomColisionAngle(){			
+			this.dx = Math.cos(Math.toRadians(new Random().nextInt(80)));
+			this.dy = Math.sin(Math.toRadians(new Random().nextInt(80)));
+	}
+
 	public void updatePongPlayer(Rectangle boundsEnemy, Rectangle boundsPlayer){
 
 		this.bounds = new Rectangle((int)(this.position_x),(int)(this.position_y),this.width,this.height);
 
 		if(this.position_x+this.width > this.SCREEN_WIDTH){
-			this.dx *= -1;
+			this.dx *= -1.0;
 		}else if(this.position_x <= 0){
-			this.dx *= -1;
+			this.dx *= -1.0;
 		}
 
 		if(this.bounds.intersects(boundsEnemy)){
 			Sound.ballColision.play();
 			this.pongPlayerSpeed += 0.1;
-			this.dx = Math.cos(Math.toRadians(new Random().nextInt(80)));
-			this.dy = Math.sin(Math.toRadians(new Random().nextInt(80)));
+			this.giveBallRandomColisionAngle();
 			if(dy < 0)		
 				this.dy *= -1;
 		}else if(this.bounds.intersects(boundsPlayer)){
 			Sound.ballColision.play();
 			this.pongPlayerSpeed += 0.1;
-			this.dx = Math.cos(Math.toRadians(new Random().nextInt(80)));
-			this.dy = Math.sin(Math.toRadians(new Random().nextInt(80)));
+			this.giveBallRandomColisionAngle();
 			if(dy > 0)		
 				this.dy *= -1;
 		}
