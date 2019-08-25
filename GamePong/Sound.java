@@ -22,13 +22,12 @@ import java.applet.AudioClip;
 public class Sound {
 
 	private AudioClip clip;
-	
-	public static final Sound musicBackground = new Sound("../sounds/music.wav");
-	public static final Sound point = new Sound("../sounds/ponto.wav");
-	public static final Sound pointEnemy = new Sound("../sounds/pontoEnemy.wav");
-	public static final Sound beep = new Sound("../sounds/beep.wav");
 
-	private Sound(String name) {
+	public static final Sound ballColision = new Sound("../sounds/beep.wav");
+	public static final Sound enemyPoint= new Sound("../sounds/pontoEnemy.wav");
+	public static final Sound playerPoint = new Sound("../sounds/pontoPlayer.wav");
+
+	public Sound(String name) {
 		try {
 			clip = Applet.newAudioClip(Sound.class.getResource(name));
 		}catch(Throwable e) {}

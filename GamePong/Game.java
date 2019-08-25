@@ -20,7 +20,6 @@ import GamePong.Screen;
 import GamePong.Player;
 import GamePong.Enemy;
 import GamePong.Ball;
-import GamePong.Sound;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -28,6 +27,7 @@ import java.awt.image.BufferedImage;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.Font;
+import GamePong.Sound;
 
 public class Game implements Runnable, KeyListener{
 
@@ -51,29 +51,32 @@ public class Game implements Runnable, KeyListener{
 		this.layer = new BufferedImage(this.WIDTH,this.HEIGHT,BufferedImage.TYPE_INT_RGB);
 		this.screen = new Screen(TITLE, WIDTH, HEIGHT, SCALE);
 		this.player = new Player(WIDTH,HEIGHT,SCALE);
-		this.player.setPongPlayerSizeAndPosition();
 		this.enemy = new Enemy(WIDTH,HEIGHT,SCALE);
-		this.enemy.setPongPlayerSizeAndPosition();
 		this.ball = new Ball(WIDTH,HEIGHT,SCALE);
-		this.ball.setPongPlayerSizeAndPosition();
 		this.screen.canvas.addKeyListener(this);
 		screen.showScreen();
 		this.screen.canvas.requestFocus();
 	}
 
+	private void restartGameAfterAPoint(){
+		this.ball.setPongPlayerPosition(this.ball.SCREEN_WIDTH/2,this.ball.SCREEN_HEIGHT/2);
+		this.ball.pongPlayerSpeed=this.ball.v0;
+		this.ball.giveBallAnStartingAngle();
+	}
+
 	public void updateGame(){
 		player.updatePongPlayer();
-		enemy.updateEnemy(this.ball.getBallXPosition());
-		ball.updateBall(enemy.getRectangle(),player.getRectangle());
+		enemy.updatePongPlayer(this.ball.getBallXPosition());
+		ball.updatePongPlayer(enemy.getPongPlayerRectangle(),player.getPongPlayerRectangle());
 
 		if(this.ball.getBallYPosition() < 0 ){
-			this.ball.setPongPlayerSizeAndPosition();
-			this.ball.playerScore++;
-			Sound.point.play();
+			this.restartGameAfterAPoint();
+			this.player.givePongPlayerAPoint();
+			Sound.playerPoint.play();
 		}else if(this.ball.getBallYPosition() > (this.HEIGHT * this.SCALE)){
-			this.ball.setPongPlayerSizeAndPosition();
-			this.ball.enemyScore++;
-			Sound.pointEnemy.play();
+			this.restartGameAfterAPoint();
+			this.enemy.givePongPlayerAPoint();
+			Sound.enemyPoint.play();
 		}
 	}
 
@@ -87,7 +90,7 @@ public class Game implements Runnable, KeyListener{
 
 		Graphics g = this.layer.getGraphics();
 		g.setColor(Color.BLACK);
-		this.screen.drawBackground(g,this.ball.enemyScore,this.ball.playerScore);
+		this.screen.drawBackground(g,this.enemy.score,this.player.score);
 		g.setColor(Color.WHITE);
 		this.player.drawPongPlayer(g);
 		g.setColor(Color.WHITE);
@@ -105,7 +108,6 @@ public class Game implements Runnable, KeyListener{
 		this.isRunning = true;
 		Thread thread = new Thread(this);
 		thread.start();
-		//Sound.musicBackground.loop();
 	}
 
 	public void run(){
@@ -125,17 +127,17 @@ public class Game implements Runnable, KeyListener{
 
 	public void keyPressed(KeyEvent e){
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-			player.right=true;
+			player.moveRight=true;
 		}else if(e.getKeyCode()==KeyEvent.VK_LEFT){
-			player.left=true;
+			player.moveLeft=true;
 		}
 	}
 
 	public void keyReleased(KeyEvent e){
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-			player.right=false;
+			player.moveRight=false;
 		}else if(e.getKeyCode()==KeyEvent.VK_LEFT){
-			player.left=false;
+			player.moveLeft=false;
 		}
 	}
 
