@@ -32,7 +32,7 @@ import GamePong.Sound;
 public class Game implements Runnable, KeyListener{
 
 	public boolean isRunning=false;
-	public boolean gameOver=false;
+	public boolean gameOver=true;
 	private int frame=0;
 	public static Screen screen;
 	public String TITLE;
@@ -42,7 +42,7 @@ public class Game implements Runnable, KeyListener{
 	private Player player;
 	private Enemy enemy;
 	public Ball ball;
-	private int fase=1;
+	private int fase=0;
 
 	public Game(String TITLE, int WIDTH, int HEIGHT, int SCALE){
 		this.TITLE = TITLE;
@@ -106,7 +106,13 @@ public class Game implements Runnable, KeyListener{
 
 	private void drawGameOverFrame(Graphics g){
 	
-		if(this.fase > 3){
+		if(this.fase == 0){
+			g.setColor(Color.BLACK);
+			this.screen.drawBackground(g);
+			g.setColor(Color.WHITE);
+			g.drawString("Pong Player",(this.ball.SCREEN_WIDTH/2)-30,(this.SCALE*this.HEIGHT)/2-10);
+			g.drawString("Press UP key to start a new game",20,(this.SCALE*this.HEIGHT)/2);
+		}else if(this.fase > 3){
 			g.setColor(Color.WHITE);
 			this.screen.drawBackground(g);
 			g.setColor(Color.BLACK);
@@ -178,6 +184,11 @@ public class Game implements Runnable, KeyListener{
 			player.moveRight=true;
 		}else if(e.getKeyCode()==KeyEvent.VK_LEFT){
 			player.moveLeft=true;
+		}else if(e.getKeyCode() == KeyEvent.VK_UP){
+			if(this.fase == 0){
+				this.gameOver=false;
+				this.fase=1;
+			}
 		}
 	}
 
