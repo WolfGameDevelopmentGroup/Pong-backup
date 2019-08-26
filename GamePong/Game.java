@@ -33,6 +33,7 @@ public class Game implements Runnable, KeyListener{
 
 	public boolean isRunning=false;
 	public boolean gameOver=true;
+	private boolean pausedGame=false;
 	private int frame=0;
 	public static Screen screen;
 	public String TITLE;
@@ -68,15 +69,18 @@ public class Game implements Runnable, KeyListener{
 	}
 
 	public void updateGame(){
-		player.updatePongPlayer();
-		enemy.updatePongPlayer(this.ball.getBallXPosition());
-		ball.updatePongPlayer(enemy.getPongPlayerRectangle(),player.getPongPlayerRectangle());
 
-		if(this.ball.getBallYPosition() < 0 ){
+		if(pausedGame==false){
+			player.updatePongPlayer();
+			enemy.updatePongPlayer(this.ball.getBallXPosition());
+			ball.updatePongPlayer(enemy.getPongPlayerRectangle(),player.getPongPlayerRectangle());
+		}
+
+		if(this.ball.getBallYPosition() <= 0 ){
 			this.restartGameAfterAPoint();
 			this.player.givePongPlayerAPoint();
 			Sound.playerPoint.play();
-		}else if(this.ball.getBallYPosition() > (this.HEIGHT * this.SCALE)){
+		}else if(this.ball.getBallYPosition() >= (this.HEIGHT * this.SCALE)){
 			this.restartGameAfterAPoint();
 			this.enemy.givePongPlayerAPoint();
 			Sound.enemyPoint.play();
@@ -84,9 +88,9 @@ public class Game implements Runnable, KeyListener{
 
 		if(this.enemy.score > 3 || this.fase > 5){
 			this.gameOver = true;
-		}else if(this.player.score > 1){
+		}else if(this.player.score > 3){
 			this.fase++;
-			this.enemy.pongPlayerSpeed += 0.1;
+			this.enemy.pongPlayerSpeed += 0.2;
 			this.player.score = 0;
 			this.enemy.score = 0;
 		}
@@ -111,16 +115,18 @@ public class Game implements Runnable, KeyListener{
 			this.screen.drawBackground(g);
 			g.setColor(Color.WHITE);
 			g.drawString("Pong Player",(this.ball.SCREEN_WIDTH/2)-30,(this.SCALE*this.HEIGHT)/2-10);
-			g.drawString("Press UP key to start a new game",20,(this.SCALE*this.HEIGHT)/2);
-		}else if(this.fase > 3){
+			g.drawString("Press UP key to start a new game",20,(this.SCALE*this.HEIGHT)/2+30);
+		}else if(this.fase > 5){
 			g.setColor(Color.WHITE);
 			this.screen.drawBackground(g);
-			g.setColor(Color.BLACK);
+			g.setColor(Color.BLUE);
 			g.drawString("YOU WIN!",(this.ball.SCREEN_WIDTH/2)-30,(this.SCALE*this.HEIGHT)/2-10);
 			g.drawString("You are the new Pong Player Master! :)",2,(this.SCALE*this.HEIGHT)/2);
+			g.drawString("Press UP key to start a new game",20,(this.SCALE*this.HEIGHT)/2+30);
 		}else{
 			g.setColor(Color.RED);
 			g.drawString("GAME OVER",(this.ball.SCREEN_WIDTH/2)-30,(this.SCALE*this.HEIGHT)/2-10);
+			g.drawString("Press UP key to start a new game",20,(this.SCALE*this.HEIGHT)/2+30);
 		}
 
 		this.ball.setPongPlayerPosition(this.ball.SCREEN_WIDTH/2,this.ball.SCREEN_HEIGHT/2);
@@ -180,14 +186,24 @@ public class Game implements Runnable, KeyListener{
 	}
 
 	public void keyPressed(KeyEvent e){
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+		if(pausedGame == false && e.getKeyCode() == KeyEvent.VK_RIGHT){
 			player.moveRight=true;
-		}else if(e.getKeyCode()==KeyEvent.VK_LEFT){
+		}else if(pausedGame == false && e.getKeyCode()==KeyEvent.VK_LEFT){
 			player.moveLeft=true;
 		}else if(e.getKeyCode() == KeyEvent.VK_UP){
-			if(this.fase == 0){
+			if(this.fase == 0 || this.fase > 5 || this.gameOver == true){
+				this.enemy.score=0;
+				this.player.score=0;
 				this.gameOver=false;
 				this.fase=1;
+				this.enemy.pongPlayerSpeed=1.5;
+				this.ball.pongPlayerSpeed=this.ball.v0;
+			}
+		}else if(e.getKeyCode() == KeyEvent.VK_DOWN){
+			if(this.pausedGame == false){
+				this.pausedGame=true;
+			}else{
+				this.pausedGame=false;
 			}
 		}
 	}

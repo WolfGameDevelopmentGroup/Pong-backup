@@ -57,8 +57,6 @@ public class Ball extends PongPlayer{
 		this.dx = Math.cos(Math.toRadians((double)angle));
 		this.dy = Math.sin(Math.toRadians((double)angle));
 
-		System.out.println(dx+" "+dy);
-
 	}
 
 	public int getBallXPosition(){
