@@ -43,18 +43,21 @@ public class Ball extends PongPlayer{
 	public void giveBallAnStartingAngle(){
 
 		int numAleatorio = new Random().nextInt(11);
-		int angle = new Random().nextInt(179);
-
-		if(angle < 10 || angle > 170){
-			angle += 5;
-		}
+		int angle = 30;
 
 		if(numAleatorio <= 5){
-			angle += 180;
+			angle = 210;
 		}
 
-		this.dx = Math.cos(Math.toRadians(angle));
-		this.dy = Math.sin(Math.toRadians(angle));
+		int dangle = new Random().nextInt(120);
+		angle = angle+dangle;
+
+		numAleatorio = new Random().nextInt(11);
+
+		this.dx = Math.cos(Math.toRadians((double)angle));
+		this.dy = Math.sin(Math.toRadians((double)angle));
+
+		System.out.println(dx+" "+dy);
 
 	}
 

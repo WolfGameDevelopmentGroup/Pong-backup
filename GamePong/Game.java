@@ -42,6 +42,7 @@ public class Game implements Runnable, KeyListener{
 	private Player player;
 	private Enemy enemy;
 	public Ball ball;
+	private int fase=1;
 
 	public Game(String TITLE, int WIDTH, int HEIGHT, int SCALE){
 		this.TITLE = TITLE;
@@ -81,25 +82,41 @@ public class Game implements Runnable, KeyListener{
 			Sound.enemyPoint.play();
 		}
 
-		if(this.enemy.score > 5){
+		if(this.enemy.score > 3 || this.fase > 5){
 			this.gameOver = true;
+		}else if(this.player.score > 1){
+			this.fase++;
+			this.enemy.pongPlayerSpeed += 0.1;
+			this.player.score = 0;
+			this.enemy.score = 0;
 		}
 	}
 
-	private void drawFrame(Graphics g){
-		g.setColor(Color.BLACK);
-		this.screen.drawBackground(g,this.enemy.score,this.player.score);
-		g.setColor(Color.WHITE);
+	private void drawFrame(Graphics g, Color backgroundColor, Color elementsColor){
+		g.setColor(backgroundColor);
+		this.screen.drawBackground(g);
+		g.setColor(elementsColor);
 		this.player.drawPongPlayer(g);
 		this.enemy.drawPongPlayer(g);
 		this.ball.drawPongPlayer(g);
+		this.screen.drawScore(g,this.enemy.score,this.player.score);
 		g = this.bs.getDrawGraphics();
 		g.drawImage(layer, 0, 0, WIDTH*SCALE,HEIGHT*SCALE,null);
 	}
 
 	private void drawGameOverFrame(Graphics g){
-		g.setColor(Color.RED);
-		g.drawString("GAME OVER",(this.ball.SCREEN_WIDTH/2)-30,(this.SCALE*this.HEIGHT)/2-10);
+	
+		if(this.fase > 3){
+			g.setColor(Color.WHITE);
+			this.screen.drawBackground(g);
+			g.setColor(Color.BLACK);
+			g.drawString("YOU WIN!",(this.ball.SCREEN_WIDTH/2)-30,(this.SCALE*this.HEIGHT)/2-10);
+			g.drawString("You are the new Pong Player Master! :)",2,(this.SCALE*this.HEIGHT)/2);
+		}else{
+			g.setColor(Color.RED);
+			g.drawString("GAME OVER",(this.ball.SCREEN_WIDTH/2)-30,(this.SCALE*this.HEIGHT)/2-10);
+		}
+
 		this.ball.setPongPlayerPosition(this.ball.SCREEN_WIDTH/2,this.ball.SCREEN_HEIGHT/2);
 		g = this.bs.getDrawGraphics();
 		g.drawImage(layer, 0, 0, WIDTH*SCALE,HEIGHT*SCALE,null);
@@ -108,7 +125,27 @@ public class Game implements Runnable, KeyListener{
 	public void renderizeGame(){
 		Graphics g = this.layer.getGraphics();
 		if(!(gameOver)){
-			this.drawFrame(g);
+
+			//TODO: Modificar a forma como passar as cores
+			// A primeira é a cor do background
+			// A segunda é a cor dos elementos da tela (Player, Enemy e Ball)
+			switch(this.fase){
+			case 1:
+				this.drawFrame(g, Color.BLACK, Color.WHITE);
+			break;
+			case 2:
+				this.drawFrame(g, Color.WHITE, Color.BLACK);
+			break;
+			case 3:
+				this.drawFrame(g, Color.BLUE, Color.ORANGE);
+			break;
+			case 4:
+				this.drawFrame(g, Color.GREEN, Color.DARK_GRAY);
+			break;
+			case 5:
+				this.drawFrame(g, Color.PINK, Color.WHITE);
+			break;
+			}
 		}else{
 			this.drawGameOverFrame(g);
 		}

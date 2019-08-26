@@ -54,9 +54,11 @@ public class Screen extends Canvas{
 		this.jframe.setVisible(true);
 	}
 
-	public void drawBackground(Graphics g,int enemyScore, int playerScore){
+	public void drawBackground(Graphics g){
 		g.fillRect(0,0,this.WIDTH*this.SCALE, this.HEIGHT*this.SCALE);
-		g.setColor(Color.WHITE);
+	}
+
+	public void drawScore(Graphics g,int enemyScore, int playerScore){
 		g.fillRect(0,this.SCALE*((this.HEIGHT/2)-2),this.WIDTH*this.SCALE,2);
 		g.drawString(""+enemyScore,this.SCALE*(this.WIDTH/2),this.SCALE*(this.HEIGHT/4));
 		g.drawString(""+playerScore,this.SCALE*(this.WIDTH/2),this.SCALE*(3*this.HEIGHT/4));
