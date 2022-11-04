@@ -177,6 +177,7 @@ public class Game implements Runnable, KeyListener{
 		thread.start();
 	}
 
+	@Override
 	public void run(){
 
 		while(isRunning){
